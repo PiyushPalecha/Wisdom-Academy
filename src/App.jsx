@@ -8,13 +8,14 @@ import Testimonials from './components/sections/Testimonials';
 import Subscribe from './components/sections/Subscribe';
 import Gallery from './components/sections/Gallery';
 import Careers from './components/sections/Careers';
+import Contact from './components/sections/Contact';
 import Footer from './layouts/Footer';
 import { Toaster } from 'react-hot-toast';
 import { motion } from 'framer-motion';
 
 function App() {
   return (
-    <div className="min-h-screen font-sans text-gray-800 bg-white">
+    <div className="min-h-screen font-sans text-gray-800 bg-white shadow-xl max-w-[100vw] overflow-x-hidden">
       <Toaster position="bottom-right" />
       <Navbar />
       <motion.main
@@ -33,6 +34,7 @@ function App() {
         </div>
         <Gallery />
         <Careers />
+        <Contact />
       </motion.main>
       <div className="bg-[#ba68f3]">
         <Footer />
