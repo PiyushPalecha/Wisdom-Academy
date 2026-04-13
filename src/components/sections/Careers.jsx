@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Briefcase, CheckCircle, Upload } from 'lucide-react';
+import { ChevronDown, Briefcase, CheckCircle, Upload, Share2, Loader2 } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 const jobs = [
   { id: 1, title: "Senior Mathematics Teacher", type: "Full-Time", location: "On-site", description: "Looking for an experienced educator to lead our advanced mathematics program." },
@@ -12,7 +13,7 @@ const jobs = [
 export default function Careers() {
   const [expandedId, setExpandedId] = useState(null);
   const [isSuccess, setIsSuccess] = useState(false);
-  const { register, handleSubmit, formState: { errors }, reset } = useForm();
+  const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm();
 
   const toggleAccordion = (id) => {
     setExpandedId(expandedId === id ? null : id);
@@ -20,10 +21,33 @@ export default function Careers() {
     reset();
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    // Simulate API request delay
+    await new Promise(resolve => setTimeout(resolve, 2000));
     console.log("Application Submitted:", data);
     setIsSuccess(true);
+    toast.success('Your application has been successfully submitted!');
     reset();
+  };
+
+  const handleShare = async (e, job) => {
+    e.stopPropagation();
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: `Apply for ${job.title} at Wisdom Academy`,
+          text: job.description,
+          url: window.location.href,
+        });
+      } else {
+        await navigator.clipboard.writeText(`${window.location.href}#careers`);
+        toast.success("Link copied to clipboard!");
+      }
+    } catch (error) {
+      if (error.name !== "AbortError") {
+        toast.error("Failed to share.");
+      }
+    }
   };
 
   return (
@@ -53,13 +77,22 @@ export default function Careers() {
                     <span>{job.location}</span>
                   </div>
                 </div>
-                <motion.div
-                  animate={{ rotate: expandedId === job.id ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="bg-gray-100 p-2 rounded-full text-gray-600"
-                >
-                  <ChevronDown className="w-5 h-5" />
-                </motion.div>
+                <div className="flex items-center gap-4">
+                  <span 
+                    onClick={(e) => handleShare(e, job)}
+                    className="p-2 bg-gray-50 hover:bg-gray-100 border border-gray-200 text-gray-600 rounded-full transition-colors cursor-pointer flex items-center justify-center shrink-0" 
+                    title="Share Job"
+                  >
+                    <Share2 className="w-4 h-4" />
+                  </span>
+                  <motion.div
+                    animate={{ rotate: expandedId === job.id ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="bg-gray-100 p-2 rounded-full text-gray-600 flex items-center justify-center"
+                  >
+                    <ChevronDown className="w-5 h-5" />
+                  </motion.div>
+                </div>
               </button>
 
               <AnimatePresence>
@@ -103,6 +136,7 @@ export default function Careers() {
                                   type="text"
                                   className="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#7D52F4]/50 focus:border-[#7D52F4] transition-all bg-gray-50/50"
                                   placeholder="John Doe"
+                                  disabled={isSubmitting}
                                 />
                                 {errors.name && <p className="text-red-500 text-xs mt-1.5 font-medium flex items-center gap-1">{errors.name.message}</p>}
                               </div>
@@ -116,6 +150,7 @@ export default function Careers() {
                                   type="email"
                                   className="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#7D52F4]/50 focus:border-[#7D52F4] transition-all bg-gray-50/50"
                                   placeholder="john@example.com"
+                                  disabled={isSubmitting}
                                 />
                                 {errors.email && <p className="text-red-500 text-xs mt-1.5 font-medium">{errors.email.message}</p>}
                               </div>
@@ -127,6 +162,7 @@ export default function Careers() {
                                 {...register('role', { required: 'Please select a role' })}
                                 className="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#7D52F4]/50 focus:border-[#7D52F4] transition-all bg-gray-50/50 cursor-pointer"
                                 defaultValue={job.title}
+                                disabled={isSubmitting}
                               >
                                 {jobs.map(j => <option key={j.id} value={j.title}>{j.title}</option>)}
                               </select>
@@ -135,10 +171,10 @@ export default function Careers() {
                             <div>
                               <label className="block text-sm font-semibold text-gray-700 mb-1.5">Resume</label>
                               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
-                                <label className="cursor-pointer group flex items-center gap-2 bg-white px-5 py-3 rounded-xl border-2 border-dashed border-gray-300 text-sm font-medium text-gray-600 hover:border-[#7D52F4] hover:bg-[#7D52F4]/5 transition-all text-center">
-                                  <Upload className="w-4 h-4 text-gray-400 group-hover:text-[#7D52F4] transition-colors" />
+                                <label className={`cursor-pointer group flex items-center gap-2 bg-white px-5 py-3 rounded-xl border-2 border-dashed border-gray-300 text-sm font-medium text-gray-600 transition-all text-center ${isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:border-[#7D52F4] hover:bg-[#7D52F4]/5'}`}>
+                                  <Upload className={`w-4 h-4 text-gray-400 transition-colors ${!isSubmitting && 'group-hover:text-[#7D52F4]'}`} />
                                   Upload Document
-                                  <input type="file" className="hidden" accept=".pdf,.doc,.docx" />
+                                  <input type="file" className="hidden" accept=".pdf,.doc,.docx" disabled={isSubmitting} />
                                 </label>
                                 <span className="text-xs text-gray-500 font-medium">Supported max file size: 5MB (PDF, DOC)</span>
                               </div>
@@ -146,9 +182,19 @@ export default function Careers() {
 
                             <button
                               type="submit"
-                              className="w-full mt-2 bg-[#7D52F4] text-white font-bold py-3.5 rounded-xl shadow-lg shadow-[#7D52F4]/30 hover:bg-[#6c43d9] hover:-translate-y-0.5 transition-all active:translate-y-0 flex items-center justify-center gap-2"
+                              disabled={isSubmitting}
+                              className={`w-full mt-2 bg-[#7D52F4] text-white font-bold py-3.5 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 ${
+                                isSubmitting ? 'opacity-70 cursor-not-allowed' : 'shadow-[#7D52F4]/30 hover:bg-[#6c43d9] hover:-translate-y-0.5 active:translate-y-0'
+                              }`}
                             >
-                              Submit Application
+                              {isSubmitting ? (
+                                <>
+                                  <Loader2 className="w-5 h-5 animate-spin" />
+                                  Submitting...
+                                </>
+                              ) : (
+                                "Submit Application"
+                              )}
                             </button>
                           </form>
                         </div>

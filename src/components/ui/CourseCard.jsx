@@ -1,14 +1,15 @@
 import { Star, Clock, Video } from 'lucide-react';
 import { motion } from 'framer-motion';
+import PropTypes from 'prop-types';
 
 export default function CourseCard({ title, image, rating, reviews, price, lessons, duration, instructor }) {
   return (
-    <motion.div 
+    <motion.article 
       whileHover={{ y: -10 }}
-      className="bg-white rounded-[24px] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col"
+      className="bg-white rounded-[24px] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col h-full"
     >
       <div className="relative">
-        <img src={image} alt={title} className="w-full h-56 object-cover" />
+        <img src={image} alt={title} loading="lazy" className="w-full h-56 object-cover" />
         <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-4 py-1.5 rounded-full text-sm font-bold text-gray-900 shadow-sm">
           ${price}
         </div>
@@ -28,12 +29,26 @@ export default function CourseCard({ title, image, rating, reviews, price, lesso
 
         <div className="mt-auto pt-4 border-t flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <img src={instructor.avatar} alt={instructor.name} className="w-8 h-8 rounded-full" />
+            <img src={instructor.avatar} alt={instructor.name} loading="lazy" className="w-8 h-8 rounded-full object-cover" />
             <span className="text-sm font-bold text-gray-900">{instructor.name}</span>
           </div>
           <button className="text-primary font-bold hover:text-[#6b42dd] text-sm transition-colors">View details</button>
         </div>
       </div>
-    </motion.div>
+    </motion.article>
   );
 }
+
+CourseCard.propTypes = {
+  title: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired,
+  reviews: PropTypes.string.isRequired,
+  price: PropTypes.string.isRequired,
+  lessons: PropTypes.string.isRequired,
+  duration: PropTypes.string.isRequired,
+  instructor: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    avatar: PropTypes.string.isRequired,
+  }).isRequired,
+};

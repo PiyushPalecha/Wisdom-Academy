@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import Button from '../components/ui/Button';
+import AuthModal from '../components/ui/AuthModal';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [authMode, setAuthMode] = useState(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,8 +38,8 @@ export default function Navbar() {
 
         {/* Auth Buttons */}
         <div className="hidden md:flex items-center space-x-4">
-          <Button variant="ghost" className="!px-4">Log In</Button>
-          <Button>Sign Up</Button>
+          <Button variant="ghost" className="!px-4" onClick={() => setAuthMode('login')}>Log In</Button>
+          <Button onClick={() => setAuthMode('signup')}>Sign Up</Button>
         </div>
 
         {/* Mobile Toggle */}
@@ -56,11 +58,19 @@ export default function Navbar() {
           <a href="#careers" onClick={() => setIsMobileMenuOpen(false)} className="text-gray-600 font-medium">Careers</a>
           <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="text-gray-600 font-medium">Contact</a>
           <div className="flex flex-col space-y-2 pt-4 border-t">
-            <Button variant="outline" className="w-full">Log In</Button>
-            <Button className="w-full">Sign Up</Button>
+            <Button variant="outline" className="w-full" onClick={() => { setIsMobileMenuOpen(false); setAuthMode('login'); }}>Log In</Button>
+            <Button className="w-full" onClick={() => { setIsMobileMenuOpen(false); setAuthMode('signup'); }}>Sign Up</Button>
           </div>
         </div>
       )}
+
+      {/* Auth Modal Portal */}
+      <AuthModal 
+        isOpen={!!authMode} 
+        mode={authMode || 'login'} 
+        onClose={() => setAuthMode(null)} 
+        onChangeMode={setAuthMode} 
+      />
     </nav>
   );
 }

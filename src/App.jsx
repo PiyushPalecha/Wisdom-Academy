@@ -9,12 +9,19 @@ import Subscribe from './components/sections/Subscribe';
 import Gallery from './components/sections/Gallery';
 import Careers from './components/sections/Careers';
 import Footer from './layouts/Footer';
+import { Toaster } from 'react-hot-toast';
+import { motion } from 'framer-motion';
 
 function App() {
   return (
     <div className="min-h-screen font-sans text-gray-800 bg-white">
+      <Toaster position="bottom-right" />
       <Navbar />
-      <main>
+      <motion.main
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
         <Hero />
         <PartnerBar />
         <FeatureGrid />
@@ -26,7 +33,7 @@ function App() {
         </div>
         <Gallery />
         <Careers />
-      </main>
+      </motion.main>
       <div className="bg-[#ba68f3]">
         <Footer />
       </div>

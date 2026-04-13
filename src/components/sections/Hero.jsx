@@ -14,12 +14,12 @@ export default function Hero() {
           className="space-y-8"
         >
           <h1 className="text-5xl lg:text-[4rem] font-extrabold text-blue-950 leading-[1.1]">
-            Innovative Learning <br/>
-            for a Changing<br/>
-            World
+            Empowering the Next <br/>
+            Generation of<br/>
+            Innovators
           </h1>
           <p className="text-lg text-gray-600 max-w-lg leading-relaxed font-medium">
-             Elevate your knowledge with diverse courses. Discover a world of interactive learning tailored just for you.
+            Wisdom Academy provides world-class education with a focus on holistic development and digital mastery.
           </p>
           <div className="flex flex-col sm:flex-row items-center gap-6 pt-4">
             <Button className="w-full sm:w-auto px-8 py-3.5 text-lg">Enroll Now</Button>

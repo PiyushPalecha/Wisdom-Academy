@@ -3,10 +3,10 @@ import { motion } from 'framer-motion';
 
 export default function FeatureGrid() {
   const benefits = [
-    { title: "One-on-One Tutoring", desc: "Get personalized guidance from expert educators tailored to your learning style.", icon: UserCheck },
-    { title: "500+ Courses", desc: "Access a massive library of courses across various domains and skill levels.", icon: BookOpen },
-    { title: "Lifetime Access", desc: "Learn at your own pace with unlimited access to your enrolled courses forever.", icon: Clock },
-    { title: "Verified Certificates", desc: "Earn certificates recognized by top institutions and companies globally.", icon: Award },
+    { title: "Advanced STEM Labs", desc: "State-of-the-art facilities equipped with modern technologies and hands-on experiments.", icon: UserCheck },
+    { title: "Expert Mentorship", desc: "Get personalized guidance from industry-leading professionals and dedicated educators.", icon: BookOpen },
+    { title: "Global Career Support", desc: "Access worldwide opportunities with our comprehensive career placement assistance.", icon: Award },
+    { title: "Flexible Hybrid Learning", desc: "Learn on your own terms with seamlessly integrated online and offline course structures.", icon: Clock },
   ];
 
   return (
