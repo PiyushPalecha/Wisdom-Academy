@@ -14,6 +14,11 @@ const galleryItems = [
   { id: 10, src: "https://images.unsplash.com/photo-1606761568499-6d2451b23c66?q=80&w=800&auto=format&fit=crop", label: "Science Lab" },
   { id: 11, src: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800&auto=format&fit=crop", label: "Collaborative Work" },
   { id: 12, src: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop", label: "Learning Center" },
+  {id: 13, src:"images/1.webp",label:"Achievements"},
+  {id: 14, src:"images/2.webp",label:"Achievements"},
+  {id: 15, src:"images/3.webp",label:"Achievements"},
+  {id: 16, src:"images/4.webp",label:"Achievements"},
+  {id: 17, src:"images/5.webp",label:"Achievements"},
 ];
 
 /* ── CARD ── */
