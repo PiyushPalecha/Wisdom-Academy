@@ -1,9 +1,10 @@
 import Navbar from './layouts/Navbar';
 import Hero from './components/sections/Hero';
 import PartnerBar from './components/sections/PartnerBar';
-import FeatureGrid from './components/sections/FeatureGrid';
 import CourseGallery from './components/sections/CourseGallery';
-import Teacher from './components/sections/Teacher';
+import AboutUs from './components/sections/AboutUs';
+import Academics from './components/sections/Academics';
+import Admissions from './components/sections/Admissions';
 import Testimonials from './components/sections/Testimonials';
 import Subscribe from './components/sections/Subscribe';
 import Gallery from './components/sections/Gallery';
@@ -22,16 +23,22 @@ function App() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
+        className="flex flex-col overflow-hidden"
       >
         <Hero />
         <PartnerBar />
-        <FeatureGrid />
+        <div className="h-12 md:h-20" /> {/* Explicit Spacer */}
+        
+        <AboutUs />
+        <Academics />
         <CourseGallery />
-        <Teacher />
+
         <div className="bg-gradient-to-b from-[#94a3fa] via-[#9e7cf5] to-[#ba68f3]">
           <Testimonials />
           <Subscribe />
         </div>
+        
+        <Admissions />
         <Gallery />
         <Careers />
         <Contact />

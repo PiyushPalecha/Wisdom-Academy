@@ -4,12 +4,13 @@ import { Play, Star, BookOpen } from 'lucide-react';
 
 export default function Hero() {
   return (
-    <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-[#eaf4ff]">
+    <section id="home" className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-[#eaf4ff]">
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
         {/* Left Content */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="space-y-8"
         >
@@ -22,20 +23,15 @@ export default function Hero() {
             Wisdom Academy provides world-class education with a focus on holistic development and digital mastery.
           </p>
           <div className="flex flex-col sm:flex-row items-center gap-6 pt-4">
-            <Button className="w-full sm:w-auto px-8 py-3.5 text-lg">Enroll Now</Button>
-            <button className="flex items-center gap-3 text-gray-700 font-semibold hover:text-primary transition-colors group">
-              <div className="w-12 h-12 rounded-full bg-white shadow-lg shadow-purple-900/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all">
-                <Play className="w-4 h-4 ml-1 fill-current" />
-              </div>
-              Watch Demo
-            </button>
+            <Button href="#contact" className="w-full sm:w-auto px-8 py-3.5 text-lg">Enroll Now</Button>
           </div>
         </motion.div>
 
         {/* Right Image */}
         <motion.div 
           initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="relative lg:h-[600px] flex justify-center items-center"
         >
@@ -59,7 +55,7 @@ export default function Hero() {
           >
             <div className="w-10 h-10 rounded-full bg-accent text-blue-900 flex items-center justify-center"><Star className="w-5 h-5 fill-current" /></div>
             <div>
-              <p className="text-sm font-extrabold text-gray-900">250+</p>
+              <p className="text-sm font-extrabold text-gray-900">50+</p>
               <p className="text-xs text-gray-500 font-medium">Tutors</p>
             </div>
           </motion.div>
@@ -71,7 +67,7 @@ export default function Hero() {
           >
              <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center"><BookOpen className="w-5 h-5" /></div>
             <div>
-              <p className="text-sm font-extrabold text-gray-900">10k+</p>
+              <p className="text-sm font-extrabold text-gray-900">1k+</p>
               <p className="text-xs text-gray-500 font-medium">Active Students</p>
             </div>
           </motion.div>

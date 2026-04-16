@@ -15,29 +15,29 @@ export default function Footer() {
         </div>
         
         <div>
-          <h4 className="font-bold text-lg mb-6">Company</h4>
+          <h4 className="font-bold text-lg mb-6 text-white">Quick Links</h4>
           <ul className="space-y-4 text-white/80 font-semibold">
-            <li><a href="#" className="hover:text-accent transition-colors">About Us</a></li>
-            <li><a href="#" className="hover:text-accent transition-colors">Careers</a></li>
-            <li><a href="#" className="hover:text-accent transition-colors">Blog</a></li>
+            <li><a href="#about" className="hover:text-accent transition-colors">About Us</a></li>
+            <li><a href="#careers" className="hover:text-accent transition-colors">Careers</a></li>
+            <li><a href="#gallery" className="hover:text-accent transition-colors">Gallery</a></li>
           </ul>
         </div>
 
         <div>
-          <h4 className="font-bold text-lg mb-6">Helpful Links</h4>
+          <h4 className="font-bold text-lg mb-6 text-white">Academics</h4>
           <ul className="space-y-4 text-white/80 font-semibold">
-            <li><a href="#" className="hover:text-accent transition-colors">Courses plan</a></li>
-            <li><a href="#" className="hover:text-accent transition-colors">Teacher directory</a></li>
-            <li><a href="#" className="hover:text-accent transition-colors">FAQ</a></li>
+            <li><a href="#curriculum" className="hover:text-accent transition-colors">Curriculum</a></li>
+            <li><a href="#faculty-staff" className="hover:text-accent transition-colors">Teacher Directory</a></li>
+            <li><a href="#admissions" className="hover:text-accent transition-colors">Admissions</a></li>
           </ul>
         </div>
 
         <div>
           <h4 className="font-bold text-lg mb-6">Contact</h4>
           <ul className="space-y-4 text-white/80 font-semibold">
-            <li>hello@wisdomacad.edu</li>
-            <li>+1 (555) 123-4567</li>
-            <li>123 Edu Lane, NY</li>
+            <li>karm8233@gmail.com</li>
+            <li>+91 8769393200</li>
+            <li>Biloda, Chittorgarh, Rajasthan</li>
           </ul>
         </div>
       </div>

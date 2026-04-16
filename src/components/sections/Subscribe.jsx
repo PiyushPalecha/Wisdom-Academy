@@ -1,9 +1,16 @@
+import { motion } from 'framer-motion';
 import Button from '../ui/Button';
 
 export default function Subscribe() {
   return (
-    <section className="relative z-20 w-full flex justify-center h-0 pointer-events-none">
-      <div className="absolute top-0 w-full max-w-5xl px-6 transform -translate-y-1/2 pointer-events-auto">
+    <section className="relative z-20 w-full flex justify-center px-6 -mt-32 pb-16">
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="w-full max-w-5xl"
+      >
         <div className="bg-[#f0f8ff] 
           rounded-tl-[100px] rounded-br-[100px] 
           rounded-tr-[30px] rounded-bl-[30px] 
@@ -38,7 +45,7 @@ export default function Subscribe() {
             </Button>
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

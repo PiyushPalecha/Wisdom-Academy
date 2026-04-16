@@ -20,15 +20,15 @@ const INFO_CARDS = [
     icon: <MapPin size={22} />,
     label: "Visit Us",
     value: "Wisdom Academy, Biloda",
-    sub: "Gujarat, India",
-    href: "https://maps.google.com/?q=Wisdom+Academy+Biloda",
+    sub: "Chittorgarh, Rajasthan",
+    href: "https://www.google.com/maps/place/Biloda,+Rajasthan/@24.5516676,74.2891304,14z/",
   },
   {
     icon: <Phone size={22} />,
     label: "Call Us",
-    value: "+91 8233787433",
+    value: "+91 8769393200",
     sub: "Available 9 AM – 5 PM",
-    href: "tel:+918233787433",
+    href: "tel:+918769393200",
   },
   {
     icon: <Mail size={22} />,
@@ -54,7 +54,13 @@ const PARTICLES = [
 ];
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: "", phone: "", message: "" });
+  const [form, setForm] = useState({ 
+    studentName: "", 
+    parentName: "", 
+    phone: "", 
+    grade: "", 
+    message: "" 
+  });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -64,36 +70,32 @@ export default function Contact() {
     e.preventDefault();
     setLoading(true);
 
-    const ownerNumber = "918233787433";
+    const ownerNumber = "918769393200";
 
     const text = [
-      `🎓 *WISDOM ACADEMY CONTACT*`,
+      `🎓 *NEW SCHOOL INQUIRY - WISDOM ACADEMY*`,
       ``,
-      `Hello! A new inquiry has come in from your website.`,
+      `*Student Details:*`,
+      `• Student Name: ${form.studentName}`,
+      `• Parent Name: ${form.parentName}`,
+      `• Grade Seeking: ${form.grade}`,
+      `• Contact No: ${form.phone}`,
       ``,
-      `👤 *Student/Parent Details:*`,
-      `• Name: ${form.name}`,
-      form.phone ? `• Phone: ${form.phone}` : `• Phone: Not provided`,
-      ``,
-      `💬 *Message/Query:*`,
-      `"${form.message || "No message provided."}"`,
+      `*Message/Query:*`,
+      `"${form.message || "No specific message provided."}"`,
       ``,
       `📅 ${new Date().toLocaleString("en-IN", {
         dateStyle: "medium",
         timeStyle: "short",
       })}`,
-      ``,
-      `Kindly get in touch with them at your convenience. 😊`,
-    ]
-      .filter(Boolean)
-      .join("\n");
+    ].join("\n");
       
     const url = `https://wa.me/${ownerNumber}?text=${encodeURIComponent(text)}`;
     window.open(url, "_blank");
 
     setLoading(false);
     setSubmitted(true);
-    setForm({ name: "", phone: "", message: "" });
+    setForm({ studentName: "", parentName: "", phone: "", grade: "", message: "" });
   };
 
   return (
@@ -119,7 +121,7 @@ export default function Contact() {
             We'd Love to <span className="text-[#7D52F4] italic">Hear From You</span>
           </h2>
           <p className="text-gray-500 max-w-xl mx-auto mt-4 font-medium">
-            Whether you want to enroll in a course, ask about our curriculum, or just say hello — we're just a message away.
+            Interested in joining Wisdom Academy? Fill out our inquiry form and we'll get back to you shortly.
           </p>
         </motion.div>
 
@@ -159,8 +161,8 @@ export default function Contact() {
 
           {/* FORM */}
           <div className="lg:col-span-3 bg-white border border-gray-100 rounded-3xl p-8 shadow-sm">
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">Send an Inquiry</h3>
-            <p className="text-gray-500 text-sm mb-6 font-medium">We'll get back to you via WhatsApp or Email.</p>
+            <h3 className="text-2xl font-bold text-gray-900 mb-2">Admission Inquiry Form</h3>
+            <p className="text-gray-500 text-sm mb-6 font-medium">Please provide accurate details for us to assist you better.</p>
 
             {submitted ? (
               <motion.div 
@@ -174,22 +176,53 @@ export default function Contact() {
                   </div>
                 </div>
                 <div>
-                  <p className="font-bold text-xl text-gray-900">Opening WhatsApp!</p>
-                  <p className="text-gray-500 text-sm mt-1 font-medium">Your message is ready to send to our support team. 💬</p>
+                  <p className="font-bold text-xl text-gray-900">Inquiry Sent to WhatsApp!</p>
+                  <p className="text-gray-500 text-sm mt-1 font-medium">We've redirected you to WhatsApp to complete the inquiry. 💬</p>
+                  <button onClick={() => setSubmitted(false)} className="mt-4 text-xs font-bold text-[#7D52F4] hover:underline">Send another inquiry</button>
                 </div>
               </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="flex flex-col gap-5">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <input type="text" name="name" placeholder="Your Name" value={form.name} onChange={handleChange} required className="w-full bg-gray-50/50 border border-gray-200 rounded-xl px-4 py-3.5 text-sm outline-none focus:border-[#7D52F4] focus:ring-2 focus:ring-[#7D52F4]/50 transition-all font-medium" />
-                  <input type="tel" name="phone" placeholder="Phone Number" value={form.phone} onChange={handleChange} required className="w-full bg-gray-50/50 border border-gray-200 rounded-xl px-4 py-3.5 text-sm outline-none focus:border-[#7D52F4] focus:ring-2 focus:ring-[#7D52F4]/50 transition-all font-medium" />
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-xs font-bold text-gray-700 ml-1">Student Name *</label>
+                    <input type="text" name="studentName" placeholder="Full name of student" value={form.studentName} onChange={handleChange} required className="w-full bg-gray-50/50 border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#7D52F4] focus:ring-2 focus:ring-[#7D52F4]/50 transition-all font-medium" />
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-xs font-bold text-gray-700 ml-1">Parent Name *</label>
+                    <input type="text" name="parentName" placeholder="Parent / Guardian name" value={form.parentName} onChange={handleChange} required className="w-full bg-gray-50/50 border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#7D52F4] focus:ring-2 focus:ring-[#7D52F4]/50 transition-all font-medium" />
+                  </div>
                 </div>
-                <textarea name="message" placeholder="How can we help you?" rows={5} value={form.message} onChange={handleChange} required className="w-full bg-gray-50/50 border border-gray-200 rounded-xl px-4 py-3.5 text-sm outline-none resize-none focus:border-[#7D52F4] focus:ring-2 focus:ring-[#7D52F4]/50 transition-all font-medium" />
-                <button type="submit" disabled={loading} className="bg-[#7D52F4] text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-[#6c43d9] disabled:opacity-70 transition-all shadow-lg shadow-[#7D52F4]/30">
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-xs font-bold text-gray-700 ml-1">Mobile Number *</label>
+                    <input type="tel" name="phone" placeholder="10-digit number" value={form.phone} onChange={handleChange} required className="w-full bg-gray-50/50 border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#7D52F4] focus:ring-2 focus:ring-[#7D52F4]/50 transition-all font-medium" />
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-xs font-bold text-gray-700 ml-1">Class Seeking Admission *</label>
+                    <select name="grade" value={form.grade} onChange={handleChange} required className="w-full bg-gray-50/50 border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#7D52F4] focus:ring-2 focus:ring-[#7D52F4]/50 transition-all font-medium appearance-none cursor-pointer">
+                      <option value="">Select Class</option>
+                      <option value="Nursery">Nursery</option>
+                      <option value="KG">KG</option>
+                      <option value="Primary (1-5)">Primary (1-5)</option>
+                      <option value="Middle (6-8)">Middle (6-8)</option>
+                      <option value="Secondary (9-10)">Secondary (9-10)</option>
+                      <option value="Senior Secondary (11-12)">Senior Secondary (11-12)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-xs font-bold text-gray-700 ml-1">Additional Message</label>
+                  <textarea name="message" placeholder="Optional notes for the admission office..." rows={4} value={form.message} onChange={handleChange} className="w-full bg-gray-50/50 border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none resize-none focus:border-[#7D52F4] focus:ring-2 focus:ring-[#7D52F4]/50 transition-all font-medium" />
+                </div>
+
+                <button type="submit" disabled={loading} className="bg-[#7D52F4] text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 hover:bg-[#6c43d9] disabled:opacity-70 transition-all shadow-lg shadow-[#7D52F4]/30 mt-2">
                   {loading ? (
-                    <><svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Sending...</>
+                    <><svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Preparing Inquiry...</>
                   ) : (
-                    <><Send size={18} /> Send via WhatsApp</>
+                    <><Send size={18} /> Submit Application via WhatsApp</>
                   )}
                 </button>
               </form>
@@ -199,14 +232,14 @@ export default function Contact() {
           {/* MAP */}
           <div className="lg:col-span-2 rounded-3xl overflow-hidden border border-gray-100 shadow-sm relative h-full min-h-[300px] lg:min-h-0 bg-gray-50">
             <a
-              href="https://maps.google.com/?q=Wisdom+Academy+Biloda"
+              href="https://www.google.com/maps/place/Biloda,+Rajasthan/@24.5516676,74.2891304,14z/"
               target="_blank"
               rel="noopener noreferrer"
               className="absolute inset-0 z-10"
             ></a>
             <iframe
               title="Wisdom Academy Location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115939.69634734899!2d72.9691657805295!3d23.684177421888046!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395db18e5b8dce75%3A0xe54d5dffe5bcbc6b!2sBiloda%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29032.69318865052!2d74.289130398141!3d24.551667636204595!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396633fe77344273%3A0x7e879efadfb11211!2sBiloda%2C%20Rajasthan!5e0!3m2!1sen!2sin!4v1776326709658!5m2!1sen!2sin"
               className="w-full h-full pointer-events-none absolute inset-0"
               style={{ border: 0 }}
               loading="lazy"

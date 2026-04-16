@@ -1,4 +1,5 @@
 import { Star } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function Testimonials() {
   const reviews = [
@@ -21,7 +22,14 @@ export default function Testimonials() {
         
         <div className="grid md:grid-cols-3 gap-8">
           {reviews.map((review, i) => (
-            <div key={i} className="bg-white p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-shadow relative">
+            <motion.div 
+              key={i} 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="bg-white p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-shadow relative"
+            >
               <div className="flex gap-1 text-accent mb-6">
                  {[...Array(5)].map((_, idx) => <Star key={idx} className="w-5 h-5 fill-current" />)}
               </div>
@@ -33,7 +41,7 @@ export default function Testimonials() {
                   <p className="text-sm text-gray-500">{review.role}</p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
